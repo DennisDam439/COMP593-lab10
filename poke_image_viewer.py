@@ -17,7 +17,7 @@ images_dir = os.path.join(script_dir, 'images')
 
 # TODO: Create the images directory if it does not exist
 if not os.path.exists(images_dir):
-    os.makedir(images_dir)
+    os.mkdir(images_dir)
 
 # Create the main window
 root = Tk()
@@ -28,8 +28,22 @@ icon_path = os.path.join(script_dir, 'icon.ico')
 root.iconbitmap(icon_path)
 
 # TODO: Create frames
+top_frame = Frame(root)
+top_frame.pack(fill=X)
 
+middle_frame = Frame(root)
+middle_frame.pack(fill=BOTH, expand=True)
+
+bottom_frame = Frame(root)
+bottom_frame.pack(fill=X)
 
 # TODO: Populate frames with widgets and define event handler functions
+pokemon_label =Label(top_frame, text=  "Select a Pokemon:")
+pokemon_label.pack(side=LEFT)
+
+pokemon_combobox =ttk.Combobox(top_frame)
+pokemon_combobox['values'] = poke_api.get_getpokemon_names()
+pokemon_combobox.pack(side=LEFT)
+
 
 root.mainloop()
