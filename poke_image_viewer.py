@@ -10,6 +10,9 @@ from tkinter import *
 from tkinter import ttk
 import os
 import poke_api
+import image_lib
+import inspect 
+import ctypes
 
 # Get the script and images directory
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -44,6 +47,5 @@ pokemon_label.pack(side=LEFT)
 pokemon_combobox =ttk.Combobox(top_frame)
 pokemon_combobox['values'] = poke_api.get_getpokemon_names()
 pokemon_combobox.pack(side=LEFT)
-
 
 root.mainloop()
