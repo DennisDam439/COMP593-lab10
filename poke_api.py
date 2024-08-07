@@ -65,6 +65,30 @@ def get_pokemon_names (limit=100000, offset= 0):
         print (f'Response code: {resp_msg.status_code} ({resp_msg.reason})')
    
     # TODO: Define function that downloads and saves Pokemon artwork
+def download_pokemon_artwork(pokemon_name, folder_path= ''):
+    poke_info = get_pokemon_info(pokemon_name)
+    if poke_info is None:
+        return 
+    
+    ## Extract the art work URL from the info dic.
+    artwork_url = poke_info ['spirites'] ['other'] ['official-artwork']['front_default']
+    if artwork_url is None:
+        print (f"No artwork available for {pokemon_name.capitalize()}.")
+        return
+    
+    #Determine the image file path 
+    file_ext = artwork_url.split('.'[-1])
+    image_path = os.path.join("folder_path. f'{pokemon_name}.{file_ext}'")
+
+    ## Don't download Pokemon artwork if there already exists one 
+    print(f'Downloading artwork for {pokemon_name.capitalize()}...', end= '')
+    image_data = image_lib.download_image(artwork_url)
+    if image_data is None:
+        return 
+    
+    ## saving  the image file
+    if image_lib.save_image_file(image_data, image_path):
+        return image_path
 
 if __name__ == '__main__':
     main()
