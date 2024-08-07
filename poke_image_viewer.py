@@ -26,6 +26,12 @@ if not os.path.exists(images_dir):
 # Create the main window
 root = Tk()
 root.title("Pokemon Viewer")
+root.geometry('600x600')
+root.minsize (500,600)
+root.columnconfigure(0, weight=1)
+root.rowconfigure(0,weight=1)
+
+
 
 # TODO: Set the icon
 icon_path = os.path.join(script_dir, 'icon.ico')
