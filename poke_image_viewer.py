@@ -46,8 +46,11 @@ frm.grid(sticky = NSEW)
 image_path = os.path.join(script_dir, 'poke_ball.png')
 photo = PhotoImage(file=image_path)
 
-lbl_image = ttk.Label(#1 TODO, #2TODO)
-lbl_image.grid(#TODO --- a,b,c,d)
+lbl_image = ttk.Label(frm, values=poke_api.get_pokemon_list()) ## TO DO 
+lbl_image.grid(row=0 column=10 padx=10, pady=10) ## TO DO 
+
+def
+
 
 #Create button to set desktop background
 def handle_set_desktop():
