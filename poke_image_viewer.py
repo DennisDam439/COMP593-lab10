@@ -77,4 +77,6 @@ cbox_poke_sel.bind('<<ComboboxSelected>>', handle_poke_sel)
 btn_set_desktop = ttk.Button(frm, text= "Set as DESKTOP BACKGROUND", command=handle_set_desktop)
 btn_set_desktop.grid(row=2, column=0, padx=10, pady=10)
 
+
+
 root.mainloop()
