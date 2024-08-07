@@ -32,7 +32,7 @@ root.columnconfigure(0, weight=1)
 root.rowconfigure(0,weight=1)
 
 # TODO: Set the icon
-ctypes.windll.shell32.SetcurrentProcessExplicitAppUserModelID('COMP593.PokeImageViewer')
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID('COMP593.PokeImageViewer')
 root.iconbitmap(os.path.join(script_dir, 'poke_ball.ico'))
 
 # TODO: Create frames
@@ -46,18 +46,35 @@ frm.grid(sticky = NSEW)
 image_path = os.path.join(script_dir, 'poke_ball.png')
 photo = PhotoImage(file=image_path)
 
-lbl_image = ttk.Label(frm, values=poke_api.get_pokemon_list()) ## TO DO 
-lbl_image.grid(row=0 column=10 padx=10, pady=10) ## TO DO 
+lbl_image = ttk.Label(frm, image=photo) ## TO DO 
+lbl_image.grid(row=0, column=10, padx=10, pady=10) ## TO DO 
 
-def
+## Create a combo for pokemon selection
+cbox_poke_sel =ttk.Combobox(frm, values=poke_api.get_pokemon_list())
+cbox_poke_sel.current(0)
+cbox_poke_sel.grid(row=1, column=10, padx=10, pady=10)
 
 
 #Create button to set desktop background
-def handle_set_desktop():
-  ## Finish this
+def handle_set_desktop(): ## Finish this
+  image_path = os.path.join(images_dir, cbox_poke_sel.get() +'.png')
+  ctypes.windll.users32.SystemParametersInfoW(20, 0, image_path, 0)
 
-def handle_poke_sel(event):
- ## Finish this
+def handle_poke_sel(event):       # Finish this
+  pokemon = cbox_poke_sel.get()
+  image_path = os.path.join(images_dir, pokemon + 'png')
+  if not os.path.exists(image_path):
+     image_data = poke_api.get_pokemon_image(pokemon)
+     with open(image_path, 'wb') as f:
+        f.write(image_data)
+photo = PhotoImage(file=image_path)
+lbl_image.config(image=photo)
+lbl_image.image = photo 
+
 cbox_poke_sel.bind('<<ComboboxSelected>>', handle_poke_sel)
+
+##Create desktop background button
+btn_set_desktop = ttk.Button(frm, text= "Set as DESKTOP BACKGROUND", command=handle_set_desktop)
+btn_set_desktop.grid(row=2, column=0, padx=10, pady=10)
 
 root.mainloop()
