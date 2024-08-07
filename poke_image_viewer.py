@@ -15,6 +15,7 @@ import inspect
 import ctypes
 
 # Get the script and images directory
+script_name = inspect
 script_dir = os.path.dirname(os.path.abspath(__file__))
 images_dir = os.path.join(script_dir, 'images')
 
