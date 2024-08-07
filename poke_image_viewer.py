@@ -15,7 +15,7 @@ import inspect
 import ctypes
 
 # Get the script and images directory
-script_name = inspect
+script_name = inspect.getfile(inspect.currentframe())
 script_dir = os.path.dirname(os.path.abspath(__file__))
 images_dir = os.path.join(script_dir, 'images')
 
@@ -31,28 +31,30 @@ root.minsize (500,600)
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0,weight=1)
 
-
-
 # TODO: Set the icon
-icon_path = os.path.join(script_dir, 'icon.ico')
-root.iconbitmap(icon_path)
+ctypes.windll.shell32.SetcurrentProcessExplicitAppUserModelID('COMP593.PokeImageViewer')
+root.iconbitmap(os.path.join(script_dir, 'poke_ball.ico'))
 
 # TODO: Create frames
-top_frame = Frame(root)
-top_frame.pack(fill=X)
+frm = ttk.Frame(root)
+frm.columnconfigure(0, weight=1)
+frm.rowconfigure(0, weight=1)
+frm.grid(sticky = NSEW)
 
-middle_frame = Frame(root)
-middle_frame.pack(fill=BOTH, expand=True)
-
-bottom_frame = Frame(root)
-bottom_frame.pack(fill=X)
 
 # TODO: Populate frames with widgets and define event handler functions
-pokemon_label =Label(top_frame, text=  "Select a Pokemon:")
-pokemon_label.pack(side=LEFT)
+image_path = os.path.join(script_dir, 'poke_ball.png')
+photo = PhotoImage(file=image_path)
 
-pokemon_combobox =ttk.Combobox(top_frame)
-pokemon_combobox['values'] = poke_api.get_getpokemon_names()
-pokemon_combobox.pack(side=LEFT)
+lbl_image = ttk.Label(#1 TODO, #2TODO)
+lbl_image.grid(#TODO --- a,b,c,d)
+
+#Create button to set desktop background
+def handle_set_desktop():
+  ## Finish this
+
+def handle_poke_sel(event):
+ ## Finish this
+cbox_poke_sel.bind('<<ComboboxSelected>>', handle_poke_sel)
 
 root.mainloop()
