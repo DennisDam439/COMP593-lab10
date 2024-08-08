@@ -11,6 +11,7 @@ POKE_API_URL = 'https://pokeapi.co/api/v2/pokemon/'
 def main():
     # Test out the get_pokemon_into() function
     # Use breakpoints to view returned dictionary
+    download_pokemon_artwork('dugtrio', r'C:\temp')
     poke_info = get_pokemon_info("Rockruff")
     return
 
@@ -71,7 +72,7 @@ def download_pokemon_artwork(pokemon_name, folder_path= ''):
         return 
     
     ## Extract the art work URL from the info dic.
-    artwork_url = poke_info ['spirites'] ['other'] ['official-artwork']['front_default']
+    artwork_url = poke_info ['sprites'] ['other'] ['official-artwork']['front_default']
     if artwork_url is None:
         print (f"No artwork available for {pokemon_name.capitalize()}.")
         return
