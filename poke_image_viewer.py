@@ -47,12 +47,12 @@ image_path = os.path.join(script_dir, 'poke_ball.png')
 photo = PhotoImage(file=image_path)
 
 lbl_image = ttk.Label(frm, image=photo) ## TO DO 
-lbl_image.grid(row=0, column=10, padx=10, pady=10) ## TO DO 
+lbl_image.grid(row=0, padx=10, pady=10, sticky=NS) ## TO DO 
 
 ## Create a combo for pokemon selection
-cbox_poke_sel =ttk.Combobox(frm, values=poke_api.get_pokemon_list())
+cbox_poke_sel =ttk.Combobox(frm, values=poke_api.get_pokemon_names())
 cbox_poke_sel.current(0)
-cbox_poke_sel.grid(row=1, column=10, padx=10, pady=10)
+cbox_poke_sel.grid(row=1, padx=10, pady=10, sticky=N)
 
 
 #Create button to set desktop background
@@ -75,7 +75,7 @@ cbox_poke_sel.bind('<<ComboboxSelected>>', handle_poke_sel)
 
 ##Create desktop background button
 btn_set_desktop = ttk.Button(frm, text= "Set as DESKTOP BACKGROUND", command=handle_set_desktop)
-btn_set_desktop.grid(row=2, column=0, padx=10, pady=10)
+btn_set_desktop.grid(row=2, padx=10, pady=10, sticky=N)
 
 
 

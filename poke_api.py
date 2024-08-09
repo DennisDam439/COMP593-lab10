@@ -59,7 +59,7 @@ def get_pokemon_names (limit=100000, offset= 0):
     resp_msg = requests.get (POKE_API_URL, params=params)
     if resp_msg.status_code== requests.codes.ok:
         print('Success')
-        resp_dict = resp_msg.jsob()
+        resp_dict = resp_msg.json()
         return [p['name'] for p in resp_dict['results']]
     else:
         print('Failure')
@@ -77,16 +77,16 @@ def download_pokemon_artwork(pokemon_name, folder_path= ''):
         print (f"No artwork available for {pokemon_name.capitalize()}.")
         return
     
-    #Determine the image file path 
-    file_ext = artwork_url.split('.'[-1])
-    image_path = os.path.join("folder_path. f'{pokemon_name}.{file_ext}'")
-
     ## Don't download Pokemon artwork if there already exists one 
     print(f'Downloading artwork for {pokemon_name.capitalize()}...', end= '')
     image_data = image_lib.download_image(artwork_url)
     if image_data is None:
         return 
     
+    #Determine the image file path 
+    url_split = artwork_url.split('.')
+    image_path = os.path.join(folder_path, f"{pokemon_name}.{url_split[-1]}")
+
     ## saving  the image file
     if image_lib.save_image_file(image_data, image_path):
         return image_path
